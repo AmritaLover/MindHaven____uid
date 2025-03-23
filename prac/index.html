@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySpace</title>
+    <link rel="stylesheet" href="stylet.css">
+
+    
+
+</head>
+<body>
+
+    <audio src="audio/HKJ.mp3" id="audio"></audio>
+
+    <div class="music-player">
+
+        <h1 class="music-name">song one</h1> 
+        <p class="artist-name">artist</p>
+
+        <div class="disk play"></div>
+        <div class="song-slider">
+            <input type="range" value="0" class="seek-bar">
+            <span class="current-time">00:00</span>
+            <snap class="song-duration">00:00</snap>
+        </div>
+
+        <div class="controls">
+            <button class="btn backward-btn"><img src="images/pre.png"></button>
+            <button class="play-btn pause">
+                <span></span>
+                <span></span>
+            </button>
+            <button class="btn forward-btn"><img src="images/nxt.png"></button>
+        </div>
+
+
+
+        
+    </div>
+
+
+    <div class="eye-container">
+        <div class="eye">
+            <div class="pupil"></div>
+        </div>
+        <div class="eye">
+            <div class="pupil"></div>
+        </div>
+    </div>
+
+
+    <div class="canvas-container">
+        <canvas id="drawingCanvas"></canvas>
+    </div>
+
+    <div class="icon-container">
+        <!-- AI chatbot(rhea) -->
+        <div class="icon rhea-icon">
+            <div class="icon-circle">
+                <img src="images/rhea.svg" alt="Rhea Icon" class="icon-svg">
+            </div>
+        </div>
+        <!-- Journal -->
+        <div class="icon journal-icon">
+            <div class="icon-circle">
+                <img src="images/journal.svg" alt="Journal Icon" class="icon-svg">
+            </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+
+
+    
+    
+
+</body>
+</html>

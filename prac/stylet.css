@@ -1,0 +1,359 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* ______________________________________________________MP3 player____________________________________________________________________ */
+/* IMP: APPLY LATER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+/* Optional: If you want to allow selection in specific areas */
+.selectable {
+    user-select: text !important;
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+}
+
+
+body {
+
+
+    user-select: none; 
+    -webkit-user-select: none; 
+    -moz-user-select: none; /* to remove default styling */
+    -ms-user-select: none; 
+
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #5f7a61;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+/* IMP: FIX THE DESIGN LATER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+.music-player {
+    width: 350px;
+    height: 550px; /* Fixed height */
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 40px 100px rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    overflow: hidden; 
+    color: #d5eebb;
+
+    /* Positioning */
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%) scale(0.6); 
+}
+
+
+.music-name,
+.artist-name {
+    text-align: center;
+    text-transform: capitalize;
+    white-space: nowrap; /* stop text wrapping */
+    overflow: hidden; 
+    text-overflow: ellipsis;} 
+
+.music-name {
+    font-size: 40px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    max-width: 100%; /* so that it doesnt exceed contianer width */
+}
+
+.artist-name {
+    font-size: 20px;
+    max-width: 100%; /* so that it doesnt exceed contianer width */
+}
+
+/* IMP:FIX DISK ROTATION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+.disk {
+    position: relative;
+    display: block;
+    margin: 40px auto;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background-image: url('images/HKJ.png');
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.08);
+    animation: rotate 20s linear infinite;
+    animation-play-state: paused;
+}
+
+.disk.play {
+    animation-play-state: running;
+}
+
+.disk::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #5f7a61;
+}
+
+
+.song-slider {
+    width: 100%;
+    position: relative;
+    margin-top: 20px;
+}
+
+.seek-bar {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 5px;
+    border-radius: 10px;
+    background: #7fc8a9;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.seek-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 1px;
+    height: 20px;
+    box-shadow: -400px 0 0 400px #d5eebb;
+}
+
+
+.current-time {
+    font-size: 14px;
+    position: absolute;
+    left: 0; 
+    top: -20px; 
+}
+
+
+.song-duration {
+    font-size: 14px;
+    position: absolute;
+    right: 0; 
+    top: -20px; 
+}
+
+
+.controls {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.play-btn {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #d5eebb;
+    cursor: pointer;
+    border: none;
+}
+
+.play-btn span {
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 30px;
+    border-radius: 2px;
+    background: #5f7a61;
+    transition: 0.5s;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.play-btn span:nth-child(2) {
+    left: 55%;
+    transform-origin: center;
+}
+
+.play-btn.pause span:nth-child(2) {
+    transform: translateY(-50%) scaleY(0);
+}
+
+.play-btn.pause span:nth-child(1) {
+    width: 35%;
+    left: 53%;
+    transform: translate(-50%, -50%);
+    border-radius: 0;
+    clip-path: polygon(0 0, 100% 50%, 100% 50%, 0% 100%);
+}
+
+.play-btn.pause {
+    animation: pulse 2s linear infinite;
+}
+
+.btn {
+    width: 40px;
+    height: 40px;
+    background: #d5eebb;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0;
+    }
+    50% {
+        box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.1);
+    }
+    100% {
+        box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.4);
+    }
+}
+
+
+
+/*____________________________________________________ Eye Container________________________________________________________________________ */
+
+.eye-container {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px; /* space between eyes */
+}
+
+/* IMP: RESET EYE DIMENSIONS & COLORS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+.eye {
+    width: 60px;
+    height: 75px;
+    background-color: #d5eebb; 
+    border-radius: 50%;
+    position: relative; 
+    overflow: hidden;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.3s ease; 
+}
+.pupil {
+    width: 30px;
+    height: 30px;
+    background-color: #5f7a61; 
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.1s ease; 
+}
+
+/* blinking animation (normal) */
+@keyframes blink {
+    0%, 100% {
+        transform: scaleY(1); 
+    }
+    50% {
+        transform: scaleY(0.1); 
+    }
+}
+
+.blink {
+    animation: blink 0.3s ease-in-out; 
+}
+
+/* squinting animation (mp3 player) */
+@keyframes squint {
+    0%, 100% {
+        transform: scaleY(1) scaleX(1); 
+    }
+    50% {
+        transform: scaleY(0.85) scaleX(1.1); 
+    }
+}
+
+.squint {
+    animation: squint 0.3s cubic-bezier(0.4, 0, 0.6, 1); 
+}
+
+
+/* CANVAS */
+.canvas-container {
+    position: relative;
+    width: 500px; 
+    height: 300px; 
+
+
+}
+
+#drawingCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: transparent; 
+    cursor: url('images/cursor.png') 16 16, auto; 
+}
+/* ___________________________________________________________________________________________ */
+
+
+.icon-container {
+    position: fixed;
+    top: 20px; 
+    right: 20px; 
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+    z-index: 1000; 
+}
+
+
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #d5eebb, #8fb09e); 
+    border-radius: 50%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.3s ease, filter 0.3s ease;
+    cursor: pointer;
+}
+
+
+.icon-svg {
+    width: 40px; 
+    height: 40px;
+    fill: none; 
+    stroke: #ffffff; 
+    stroke-width: 2px; 
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+
+.icon-circle:hover {
+    transform: scale(1.1); 
+    filter: drop-shadow(0 0 10px rgba(213, 238, 187, 0.8));
+}
